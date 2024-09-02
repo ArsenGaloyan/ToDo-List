@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { TiPencil } from "react-icons/ti";
 
 export default function TaskTodo({
   status,
@@ -12,9 +13,14 @@ export default function TaskTodo({
 }) {
   const [isEditing, setIsEditing] = useState(false);
   const [editText, setEditText] = useState(text);
+  const [shortenedText, setShortenedText] = useState(text);
 
   useEffect(() => {
-    setEditText(text);
+      if (text.length > 75) {
+      setShortenedText(text.substring(0, 75) + "...");
+    } else {
+      setShortenedText(text);
+    }
   }, [text]);
 
   const taskContent = function (status, text) {
@@ -32,7 +38,7 @@ export default function TaskTodo({
   };
   const handleCancelEdit = () => {
     setIsEditing(!isEditing)
-    setEditText()
+    setEditText(text)
   };
   const handleKeyPress = (e) => {
     if (e.key === "Enter") {
@@ -67,7 +73,7 @@ export default function TaskTodo({
         >
           {isEditing ? (
             <textarea
-            className="changeTextTask"
+            className= {` changeTextTask ${theme}`}
               type="text"
               value={editText}
               onChange={(e) => setEditText(e.target.value)}
@@ -75,14 +81,14 @@ export default function TaskTodo({
               onClick = {(e)=>e.stopPropagation()}
             />
           ) : (
-            taskContent(status, text)
+            taskContent(status, shortenedText)
           )}
         </div>
       </div>
       {isEditing ? (
         <div className="taskEditDeleteBlock">
-          <button onClick={handleSaveEdit}>Сохранить</button>
-          <button onClick={handleCancelEdit}>Отменить</button>
+          <button  className='buttonSaveEdit'onClick={handleSaveEdit}>Save</button>
+          <button className='buttonDeleteEdit' onClick={handleCancelEdit}>Cancel</button>
         </div>
       ) : (
         <div className="taskEditDeleteBlock">
@@ -90,7 +96,7 @@ export default function TaskTodo({
             className="buttonPencilEdit"
             onClick={handleOpenEditTask}
           >
-            <img className="imagePencilEdit" src="/img/pencil.png"></img>
+           {theme === "light"?<TiPencil />:<TiPencil style = {{color: "white"}}/>}
           </button>
           <button
             className={`buttonDeleteTask ${theme}`}

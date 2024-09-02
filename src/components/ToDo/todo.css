@@ -12,12 +12,12 @@
 
 .backgroundLight {
   background-image: url("../../../public/img/img_todo/bg-desktop-light.jpg");
-  background-size: auto;
+  background-size: 100%;
   background-repeat: no-repeat;
 }
 .backgroundDark {
   background-image: url("../../../public/img/img_todo/bg-desktop-dark.jpg");
-  background-size: auto;
+  background-size: 100%;
   background-repeat: no-repeat;
 }
 .todoContainer {
@@ -387,4 +387,18 @@ position: relative;
   }
 
   
+}
+.buttonSaveEdit{
+  border-radius: 10px;
+  padding: 10px;
+  color:white;
+  background-color: green;
+  border:none;
+}
+.buttonDeleteEdit{
+  border-radius: 10px;
+  padding: 10px;
+  color:white;
+  background-color: red;
+  border:none;
 }
