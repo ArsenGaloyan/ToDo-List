@@ -1,7 +1,15 @@
 import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { v4 as uuidv4 } from "uuid";
-export default function TodoInput({ setTasks, theme }) {
+import { setAddTask } from "../../features/todos/todosSlice";
+export default function TodoInput() {
   const [textTodo, setTextTodo] = useState("");
+
+  const theme = useSelector((state)=> state.theme.currentTheme)
+
+  const dispatch = useDispatch()
+  
+  
 
   const handleClickAddTask = () => {
     const newTask = {
@@ -10,7 +18,7 @@ export default function TodoInput({ setTasks, theme }) {
       status: false,
     };
     if (textTodo.trim().length !== 0) {
-      setTasks((prev) => [newTask, ...prev]);
+      dispatch(setAddTask(newTask));
       
       setTextTodo("");
     }
